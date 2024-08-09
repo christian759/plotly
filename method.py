@@ -1,13 +1,10 @@
 import re
 import numpy as np
-import matplotlib as plt
 from pydantic import BaseModel
+import matplotlib.pyplot as plt
 
-class Methods(BaseModel):
-    def __init__(self) -> None:
-        pass
-
-    def result(fig: int, equation: str, formatter: function) -> str:
+class Method(BaseModel):
+    def result(fig: int, equation: str, formatter) -> str:
         ans = formatter(equation=equation, fig=fig)
         return ans
     
@@ -15,7 +12,7 @@ class Methods(BaseModel):
         formatted = re.sub(r'(\d+)x', r'\1*x', equation)
         formatted = formatted.replace("^", "**")
         formatted = formatted.replace("x", str(fig))
-        equals = eval(formatted)
+        equals: str = eval(formatted)
         return equals
     
     
@@ -37,3 +34,4 @@ class Methods(BaseModel):
         plt.grid(grid)
         plt.legend()
         plt.show()
+        
