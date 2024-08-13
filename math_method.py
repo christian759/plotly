@@ -1,7 +1,10 @@
+# -*- coding: utf-8 -*-
+
 import re
 import numpy as np
 from pydantic import BaseModel
 import matplotlib.pyplot as plt
+from sympy import symbols, solve, Eq
 
 class Method(BaseModel):
     def result(fig: int, equation: str, formatter) -> str:
@@ -34,4 +37,10 @@ class Method(BaseModel):
         plt.grid(grid)
         plt.legend()
         plt.show()
+        
+    def quadratic_roots(equation:str) -> str:
+        x = symbols('x')
+        roots = solve(equation, x)
+        answer = f"the roots of the equation are {roots[1]}"
+        return answer
         
